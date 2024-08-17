@@ -64,3 +64,18 @@ Follow these steps to set up the environment (e.g. Ubuntu 22.04):
     tofu plan
     tofu apply
     ```
+
+
+## Retrieve and Decode a Terraform Plan or State File from a Kubernetes Secret
+
+To get a gzipped plan or state file from a Kubernetes secret, run:
+
+```bash
+kubectl get secret tfplan-default-project-1-dev -n flux-system -o jsonpath='{.data}' | jq -r 'to_entries[] | "\(.value)"' | base64 -d > ~/Downloads/plan-or-state-file.gz
+```
+
+You can then unzip the file using:
+
+```bash
+gunzip ~/Downloads/plan-or-state-file.gz
+```
