@@ -21,6 +21,25 @@ terraform {
   }
 }
 
+# Create local file for environment credentials
+resource "null_resource" "create_env_secret_file" {
+  provisioner "local-exec" {
+    command = <<EOT
+      cat > ~/my-env-credentials.yaml <<EOF
+      apiVersion: v1
+      kind: Secret
+      metadata:
+          name: my-env-credentials
+          namespace: flux-system
+      type: Opaque
+      stringData:
+          AWS_ACCESS_KEY_ID: ${var.aws_access_key_id}
+          AWS_SECRET_ACCESS_KEY: ${var.aws_secret_access_key}
+          AWS_REGION: us-east-1
+    EOT
+  }
+}
+
 # Define a Kubernetes cluster using kind
 resource "kind_cluster" "this" {
   name = "hub-cluster"
