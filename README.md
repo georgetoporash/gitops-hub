@@ -64,7 +64,7 @@ Follow these steps to set up the environment (e.g. Ubuntu 22.04):
     ```
 
 
-## Retrieve and Decode a Terraform Plan or State File from a Kubernetes Secret
+## Retrieve Terraform Plan or State File
 
 To get a gzipped plan or state file from a Kubernetes secret, run:
 
