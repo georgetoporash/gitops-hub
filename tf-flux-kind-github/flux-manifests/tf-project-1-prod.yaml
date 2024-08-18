@@ -1,0 +1,19 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: project-1-prod
+  namespace: flux-system
+spec:
+  approvePlan: auto
+  destroyResourcesOnDeletion: true
+  interval: 1m
+  path: ./clusters/gitops-hub-manage/tf-projects/project-1-prod/
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  runnerPodTemplate:
+    spec:
+      envFrom:
+      - secretRef:
+          name: my-env-credentials
