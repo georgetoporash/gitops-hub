@@ -1,8 +1,6 @@
 # GitOps Hub Project with IaC, Flux, and GitHub
 
-This project sets up a GitOps hub using Infrastructure as Code (IaC), Flux, and GitHub. The goal is to automate the deployment and management of Kubernetes clusters and applications, using Git as the single source of truth.
-
-This project sets up a GitOps hub for testing purposes using Infrastructure as Code (IaC), Flux, GitHub, and AWS. The goal is to automate the deployment and management of Kubernetes clusters and applications, with Git as the single source of truth. For testing, this project uses Kubernetes management options such as local KIND, while utilizing AWS for storing secrets and managing other cloud resources.
+This project sets up a GitOps hub using Infrastructure as Code (IaC), Flux, GitHub, and AWS for testing purposes. It automates the deployment and management of Kubernetes clusters and applications, with Git as the single source of truth, leveraging KIND for local testing and AWS for secret storage and cloud resources.
 
 ## Overview
 
@@ -71,11 +69,11 @@ Follow these steps to set up the environment (e.g. Ubuntu 22.04):
 To get a gzipped plan or state file from a Kubernetes secret, run:
 
 ```bash
-kubectl get secret tfplan-default-project-1-dev -n flux-system -o jsonpath='{.data}' | jq -r 'to_entries[] | "\(.value)"' | base64 -d > ~/Downloads/plan-or-state-file.gz
+kubectl get secret tfplan-default-project-1-dev -n flux-system -o jsonpath='{.data}' | jq -r 'to_entries[] | "\(.value)"' | base64 -d > ~/plan-or-state-file.gz
 ```
 
 You can then unzip the file using:
 
 ```bash
-gunzip ~/Downloads/plan-or-state-file.gz
+gunzip ~/plan-or-state-file.gz
 ```
